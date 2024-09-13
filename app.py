@@ -5,8 +5,6 @@ from flask import Flask, render_template, jsonify
 
 app = Flask(__name__)
 
-app = Flask(__name__)
-
 @app.route('/')
 def home():
     return render_template('index.html')
@@ -25,22 +23,18 @@ myApp.geometry("1200x800")
 myApp.configure(background='light blue')
 myApp.title("Do You Like Me?")
 
-
 mainMenu = tk.Frame(myApp, background='light blue')
 mainMenu.place(relx=0.5, rely=0.5, anchor='center')
-
 
 def move_no_button():
     new_x = random.randint(100, 900)
     new_y = random.randint(100, 600)
     btn_no.place(x=new_x, y=new_y)
 
-
 def display_gif():
     gif_path = "cat.gif"  
     img = Image.open(gif_path)
 
-   
     frames = []
     try:
         while True:
@@ -54,7 +48,7 @@ def display_gif():
         myApp.after(100, update_gif, (index + 1) % len(frames))
 
     label = tk.Label(mainMenu, bg='light blue')
-    label.grid(column=7, row=4)
+    label.grid(column=0, row=0, columnspan=2, pady=20)
     update_gif(0)
 
 def display_heart_gif():
@@ -72,7 +66,7 @@ def display_heart_gif():
         pass 
 
     heart_label = tk.Label(myApp, bg='light blue')
-    heart_label.place(relx=0, rely=0, relwidth=1, relheight=1)  
+    heart_label.place(relx=0.5, rely=0.5, anchor='center')  
 
     tk.Label(myApp, text="I know", font=('Helvetica', 24, 'bold italic'), bg='light blue', fg='dark blue').place(relx=0.5, rely=0.9, anchor='center')
 
@@ -81,28 +75,22 @@ def display_heart_gif():
         index = (index + 1) % len(heart_frames)  
         myApp.after(100, update_heart_gif, index)  
 
-    
     update_heart_gif(0)
-
 
 text = tk.Label(mainMenu, text="Do you like me?", font=('Helvetica', 24, 'bold italic'),
                 background='light blue', bd=20, fg='dark blue')  
-text.grid(column=7, row=5, pady=20)
-
+text.grid(column=0, row=1, pady=20)
 
 btn_yes = tk.Button(mainMenu, text="Yes", font=('Helvetica 14 bold italic'),
                     background='pink', activebackground='red', bd=5, height=2,
                     width=10, fg='white', relief=tk.SOLID, command=display_heart_gif)
-btn_yes.grid(column=10, row=5, padx=20)
+btn_yes.grid(column=1, row=2, padx=20)
 
-
-btn_no = tk.Button(myApp, text="No", font=('Helvetica 14 bold italic'),
+btn_no = tk.Button(mainMenu, text="No", font=('Helvetica 14 bold italic'),
                    background='pink', activebackground='red', bd=5, height=2,
                    width=10, fg='white', relief=tk.SOLID, command=move_no_button)
-btn_no.place(x=500, y=400)  
-
+btn_no.grid(column=1, row=3, padx=20)
 
 display_gif()
-
 
 myApp.mainloop()
