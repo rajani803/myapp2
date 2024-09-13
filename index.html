@@ -1,75 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Do You Like Me?</title>
-    <style>
-        body {
-            background-color: lightblue;
-            text-align: center;
-        }
-        #noButton {
-            position: absolute;
-            background-color: pink;
-            border: solid;
-            color: white;
-            font-size: 14px;
-            height: 50px;
-            width: 100px;
-            cursor: pointer;
-        }
-        #heartGif, #catGif {
-            display: none;
-        }
-        #text {
-            font-size: 24px;
-            font-weight: bold;
-            color: darkblue;
-        }
-        #iKnow {
-            font-size: 24px;
-            font-weight: bold;
-            color: darkblue;
-        }
-    </style>
-</head>
-<body>
-    <div id="text">Do you like me?</div>
-    <button onclick="showHearts()">Yes</button>
-    <button id="noButton" onclick="moveNoButton()">No</button>
-    <div id="iKnow">I know</div>
-    <img id="heartGif" src="path_to_pink_heart.gif" />
-    <img id="catGif" src="path_to_cat.gif" />
-
-    <script>
-        let heartGif = document.getElementById('heartGif');
-        let catGif = document.getElementById('catGif');
-        let noButton = document.getElementById('noButton');
-
-        function showHearts() {
-            heartGif.style.display = 'block';
-            setInterval(() => {
-                heartGif.src = heartGif.src.split('?')[0] + '?' + new Date().getTime();
-            }, 100); // Refresh GIF every 100ms
-        }
-
-        function moveNoButton() {
-            fetch('/move_no_button')
-                .then(response => response.json())
-                .then(data => {
-                    noButton.style.left = data.x + 'px';
-                    noButton.style.top = data.y + 'px';
-                });
-        }
-
-        // Load cat GIF on page load
-        window.onload = function() {
-            catGif.style.display = 'block';
-            setInterval(() => {
-                catGif.src = catGif.src.split('?')[0] + '?' + new Date().getTime();
-            }, 100); // Refresh GIF every 100ms
-        };
+ 
     </script>
 </body>
 </html>
