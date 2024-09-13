@@ -1,6 +1,24 @@
 import tkinter as tk
 from PIL import Image, ImageTk
 import random
+from flask import Flask, render_template, jsonify
+
+app = Flask(__name__)
+
+app = Flask(__name__)
+
+@app.route('/')
+def home():
+    return render_template('index.html')
+
+@app.route('/move_no_button')
+def move_no_button():
+    new_x = random.randint(100, 900)
+    new_y = random.randint(100, 600)
+    return jsonify({'x': new_x, 'y': new_y})
+
+if __name__ == "__main__":
+    app.run(debug=True)
 
 myApp = tk.Tk()
 myApp.geometry("1200x800")

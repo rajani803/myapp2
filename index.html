@@ -3,52 +3,74 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Welcome to my GitHub Pages site.">
-    <title>My GitHub Page</title>
+    <title>Do You Like Me?</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
+            background-color: lightblue;
             text-align: center;
-            background-color: #f4f4f4;
-            color: #333;
         }
-        header {
-            background-color: #4CAF50;
+        #noButton {
+            position: absolute;
+            background-color: pink;
+            border: solid;
             color: white;
-            padding: 10px 0;
+            font-size: 14px;
+            height: 50px;
+            width: 100px;
+            cursor: pointer;
         }
-        main {
-            padding: 20px;
+        #heartGif, #catGif {
+            display: none;
         }
-        footer {
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px 0;
-            position: fixed;
-            width: 100%;
-            bottom: 0;
+        #text {
+            font-size: 24px;
+            font-weight: bold;
+            color: darkblue;
+        }
+        #iKnow {
+            font-size: 24px;
+            font-weight: bold;
+            color: darkblue;
         }
     </style>
 </head>
 <body>
-    <header>
-        <h1>Welcome to My GitHub Page</h1>
-    </header>
-    <main>
-        <h2>About Me</h2>
-        <p>This is a simple GitHub Pages site to showcase my projects and work.</p>
-        
-        <h2>My Projects</h2>
-        <ul>
-            <li><a href="https://github.com/rajani803/myapp" target="_blank">MyApp</a></li>
-            <!-- Add more project links here -->
-        </ul>
-    </main>
-    <footer>
-        <p>&copy; 2024 My GitHub Page. All rights reserved.</p>
-    </footer>
+    <div id="text">Do you like me?</div>
+    <button onclick="showHearts()">Yes</button>
+    <button id="noButton" onclick="moveNoButton()">No</button>
+    <div id="iKnow">I know</div>
+    <img id="heartGif" src="path_to_pink_heart.gif" />
+    <img id="catGif" src="path_to_cat.gif" />
+
+    <script>
+        let heartGif = document.getElementById('heartGif');
+        let catGif = document.getElementById('catGif');
+        let noButton = document.getElementById('noButton');
+
+        function showHearts() {
+            heartGif.style.display = 'block';
+            setInterval(() => {
+                heartGif.src = heartGif.src.split('?')[0] + '?' + new Date().getTime();
+            }, 100); // Refresh GIF every 100ms
+        }
+
+        function moveNoButton() {
+            fetch('/move_no_button')
+                .then(response => response.json())
+                .then(data => {
+                    noButton.style.left = data.x + 'px';
+                    noButton.style.top = data.y + 'px';
+                });
+        }
+
+        // Load cat GIF on page load
+        window.onload = function() {
+            catGif.style.display = 'block';
+            setInterval(() => {
+                catGif.src = catGif.src.split('?')[0] + '?' + new Date().getTime();
+            }, 100); // Refresh GIF every 100ms
+        };
+    </script>
 </body>
 </html>
 
